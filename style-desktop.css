@@ -1,0 +1,141 @@
+/* --- 1. Reset và Cấu trúc cơ bản --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+    color: #333;
+    user-select: none;
+}
+
+/* --- 2. Bìa thiệp (#cover) (DESKTOP) --- */
+#cover {
+    /* Đảm bảo các giá trị cơ bản không bị ghi đè */
+}
+#cover h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 7.5rem; /* Giá trị lớn cho Desktop */
+    margin: 0;
+    text-shadow: 0 0 50px rgba(255, 255, 255, 0.9), 0 0 80px rgba(255, 20, 147, 0.9);
+}
+#cover p {
+    font-size: 2.2rem;
+    margin: 25px 0 40px;
+    font-weight: 700;
+}
+#openBtn {
+    padding: 22px 70px;
+    font-size: 2rem; 
+    margin-bottom: 20px; 
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); box-shadow: 0 15px 45px rgba(255, 20, 147, 0.8); }
+}
+
+/* Ảnh Rồng trang trí trên Cover (HIỂN THỊ TRÊN DESKTOP) */
+.cover-dragon {
+    position: absolute;
+    width: clamp(150px, 20vw, 250px);
+    height: auto;
+    opacity: 0.85;
+    z-index: 999;
+    filter: drop-shadow(0 0 15px rgba(0,0,0,0.5));
+    display: block !important; /* Đảm bảo hiển thị */
+}
+#cd1 { top: 5%; left: 3%; }
+#cd2 { bottom: 5%; right: 3%; transform: scaleX(-1); }
+
+/* Ảnh bé đứng cạnh nút bấm trên Cover */
+.baby-cover-pose {
+    position: absolute;
+    width: clamp(120px, 30vw, 480px); /* Tăng kích thước ảnh theo yêu cầu */
+    bottom: 0%; 
+    left: 70%; /* Thêm lại để căn giữa */
+    transform: translateX(-50%); /* Thêm lại để căn giữa */
+    z-index: 9998; /* ĐIỀU CHỈNH: Đặt thấp hơn nút bấm */
+    /* ... các thuộc tính animation và filter khác nếu có ... */
+    top: 35%;
+}
+
+
+/* --- 3. Nội dung chính (.main) --- */
+.main {
+    padding: 100px 0; 
+}
+
+/* --- 4. 4 bé rồng góc (.corner-dragon) --- */
+.corner-dragon {
+    width: clamp(100px, 15vw, 200px); /* Kích thước lớn hơn */
+    opacity: 0.9;
+}
+#d1 { top: 20px; left: 15px; } 
+#d2 { top: 30px; right: 20px; transform: scaleX(-1); animation-delay: 2s; }
+#d3 { bottom: 30px; left: 25px; animation-delay: 4s; }
+#d4 { bottom: 40px; right: 15px; transform: scaleX(-1); animation-delay: 6s; }
+
+/* --- 5. 4 ảnh thật của bé (.baby) --- */
+.baby {
+    width: clamp(180px, 20vw, 280px); 
+    border-radius: 30px;
+}
+#b1 { top: 6%; left: 6%; } 
+#b2 { top: 6%; right: 3%; } 
+#b3 { bottom: 6%; left: 4%; } 
+#b4 { bottom: 6%; right: 4%; } 
+
+/* --- 6. Phần chữ chính (.container) --- */
+h1 {
+    font-size: 8.5rem; /* Giá trị lớn cho Desktop */
+}
+h2 {
+    font-size: 5rem;
+    margin: 10px 0 25px;
+}
+.info {
+    padding: 50px 45px;
+    border-radius: 50px;
+    font-size: 1.7rem; 
+    line-height: 2.2;
+    border: 8px solid #ffb6c1;
+}
+.btn-music {
+    margin-top: 50px;
+    padding: 25px 60px;
+    font-size: 2rem;
+}
+
+/* --- 7. Hiệu ứng rơi và pháo hoa --- */
+.falling {
+    font-size: 58px; 
+}
+.firework-effect {
+    font-size: 60px;
+}
+/* Tối ưu các thông tin quan trọng - DESKTOP */
+.info .highlight-parent {
+    color: #ff1493;
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+.info .section-title {
+    font-size: 1.5rem;
+    color: #a0005a;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+.info .highlight-date,
+.info .highlight-time,
+.info .highlight-location {
+    display: block;
+    font-size: 2.2rem; /* Rất lớn cho Desktop */
+    color: #d6006e;
+    font-weight: 900;
+    padding: 5px 0;
+    text-shadow: 1px 1px 0 #fff;
+}
+.info .highlight-location {
+    font-size: 1.8rem;
+    color: #4A90E2; /* Màu xanh nổi bật cho địa điểm */
+    line-height: 1.3;
+}

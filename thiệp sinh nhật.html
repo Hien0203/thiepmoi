@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>🎉 Thôi Nôi 1 Tuổi Bé Thảo Vy - Công Chúa Rồng Con 🎉</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style-mobile.css"> 
+
+<link rel="stylesheet" href="style-desktop.css" media="(min-width: 769px)"> 
+
+</head>
+<body>
+
+<div id="cover">
+    <img src="rong1.png" alt="Rồng trang trí bìa trái" class="cover-dragon" id="cd1">
+    <img src="rong2.png" alt="Rồng trang trí bìa phải" class="cover-dragon" id="cd2">
+
+    <h1>Công Chúa Rồng Con</h1>
+    <p>Thôi Nôi 1 Tuổi Của Bé **Thảo Vy**</p>
+    <button id="openBtn">MỞ THIỆP</button>
+
+    <img src="rong2new.png" alt="Bé Thảo Vy chỉ vào nút" class="baby-cover-pose">
+</div>
+
+<div class="main" id="mainContent">
+
+    <img src="rong1.png" alt="Rồng trang trí" class="corner-dragon" id="d1">
+    <img src="rong2.png" alt="Rồng trang trí" class="corner-dragon" id="d2">
+    <img src="rong3.png" alt="Rồng trang trí" class="corner-dragon" id="d3">
+    <img src="rong4.png" alt="Rồng trang trí" class="corner-dragon" id="d4">
+
+    <img src="embe1.png" alt="Ảnh bé Thảo Vy 1" class="baby" id="b1">
+    <img src="embe3.png" alt="Ảnh bé Thảo Vy 2" class="baby" id="b2">
+    <img src="embe4.png" alt="Ảnh bé Thảo Vy 3" class="baby" id="b3">
+    <img src="embe2.png" alt="Ảnh bé Thảo Vy 4" class="baby" id="b4">
+
+    <div class="container">
+        <h1>Thảo Vy</h1>
+        <h2>Tròn 1 Tuổi Yêu Thương</h2>
+
+        <div class="info">
+            <p>Ba mẹ <span class="highlight-parent">Đinh Công Hiển</span> & <span class="highlight-parent">Đoàn Hiền Trang</span><br>trân trọng kính mời quý cô chú, anh chị em<br>đến chung vui ngày thôi nôi của công chúa nhỏ</p>
+            
+            <p class="section-title">Sinh nhật bé</p>
+            <p class="highlight-date">Ngày 16/12/2024(Tuổi Giáp Thìn)</p>
+            
+            <p class="section-title">⏰ Thời gian & Địa điểm 📍</p>
+            <p class="highlight-time">16h30 chiều, Thứ 7 ngày 13/12/2025</p>
+            <p class="highlight-location">[Cổng làng Kỳ Úc / 148 Tổ dân phố số 4, Phúc Thọ, Hà Nội]</p>
+            
+            <p>Sự hiện diện của mọi người là món quà lớn nhất cho bé Thảo Vy. <br>Xin chân thành cảm ơn!</p>
+        </div>
+
+        <button class="btn-music" onclick="toggleMusic()">BẬT/TẮT NHẠC CHÚC MỪNG</button>
+    </div>
+</div>
+
+<audio id="music" loop>
+    <source src="happy-birthday-357371.mp3" type="audio/mp3">
+</audio>
+
+<script>
+// MỞ THIỆP VÀ TẠO PHÁO HOA
+document.getElementById('openBtn').onclick = function() {
+    document.getElementById('cover').style.opacity = '0';
+    document.getElementById('cover').style.visibility = 'hidden'; 
+    document.getElementById('mainContent').style.opacity = '1';
+    
+    // Tạo pháo hoa sau khi mở
+    setTimeout(() => {
+        document.getElementById('cover').remove();
+        for(let i=0; i<40; i++) setTimeout(createFirework, i*150 + Math.random()*200); 
+    }, 1200);
+    
+    // Bật nhạc ngay khi mở (do trình duyệt thường chặn autoplay)
+    if (!playing) {
+        audio.play().catch(e => console.log('Tự động chơi nhạc bị chặn.'));
+        playing = true;
+    }
+};
+
+// NHẠC NỀN
+let playing = false;
+const audio = document.getElementById('music');
+function toggleMusic(){ 
+    if(playing) {
+        audio.pause();
+    } else {
+        audio.play().catch(e => console.log('Tự động chơi nhạc bị chặn.')); 
+    }
+    playing = !playing;
+}
+
+// HIỆU ỨNG RƠI (Dâu, bóng, sao)
+setInterval(() => {
+    const item = document.createElement('div');
+    item.className = 'falling';
+    
+    const symbols = ['🍓', '🎈', '🎂', '✨', '🎀', '💖', '👑', '🍼'];
+    item.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+    
+    item.style.left = Math.random() * 100 + 'vw';
+    item.style.animationDuration = (7 + Math.random() * 8) + 's';
+    
+    // Sử dụng CSS để điều chỉnh kích thước hiệu ứng rơi, nhưng nếu cần code JS thì để ở đây
+    item.style.fontSize = (45 + Math.random() * 20) + 'px'; 
+    
+    document.body.appendChild(item);
+    setTimeout(() => item.remove(), 16000);
+}, 600); 
+
+// HIỆU ỨNG PHÁO HOA
+function createFirework(){
+    const fw = document.createElement('div');
+    fw.className = 'firework-effect';
+    fw.style.left = `${Math.random()*80 + 10}vw`; 
+    fw.style.top = `${Math.random()*60 + 10}vh`;
+    fw.innerText = ['✨🎉', '💖🎊', '🎂🌟'][Math.floor(Math.random()*3)];
+    fw.style.opacity = 1;
+    
+    document.body.appendChild(fw);
+    setTimeout(() => fw.style.opacity = 0, 1500);
+    setTimeout(() => fw.remove(), 2000);
+}
+</script>
+</body>
+</html>

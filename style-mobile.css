@@ -1,0 +1,289 @@
+/* --- 1. Reset và Cấu trúc cơ bản --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    background: #ffeaf4;
+    font-family: 'Nunito', sans-serif;
+    color: #333;
+    user-select: none;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- 2. Bìa thiệp (#cover) (MOBILE) --- */
+#cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff1493 0%, #ff69b4 50%, #ffb6c1 100%); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: all 1.2s ease-in-out;
+    color: white;
+    text-align: center;
+    backdrop-filter: blur(8px);
+}
+#cover h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 14vw; /* Tối ưu Mobile */
+    margin: 0;
+    text-shadow: 0 0 50px rgba(255, 255, 255, 0.9), 0 0 80px rgba(255, 20, 147, 0.9);
+}
+#cover p {
+    font-size: 1.2rem; /* Tối ưu Mobile */
+    margin: 15px 0 20px;
+    font-weight: 700;
+}
+#openBtn {
+    padding: 15px 45px;
+    font-size: 1.2rem; /* Tối ưu Mobile */
+    background: #4A90E2; 
+    color: white;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    font-weight: 900;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4), 0 0 50px #4A90E2;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    animation: pulse 2.5s infinite;
+    margin-bottom: 5px; 
+}
+#openBtn:hover {
+    transform: scale(1.08);
+    background: #6DBCF0; 
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); box-shadow: 0 15px 45px rgba(255, 20, 147, 0.8); }
+}
+
+/* Ảnh Rồng trang trí trên Cover (ẨN TRÊN MOBILE) */
+.cover-dragon {
+    display: none;
+}
+
+/* Ảnh bé đứng cạnh nút bấm trên Cover */
+.baby-cover-pose {
+    position: absolute;
+    width: 150px; /* Cố định kích thước nhỏ */
+    height: auto;
+    bottom: 10px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 1000;
+    filter: drop-shadow(0 10px 20px rgba(255, 20, 147, 0.6));
+    animation: bounce 3s infinite ease-in-out;
+    border-radius: 20px;
+    object-fit: contain;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-15px); }
+}
+
+/* --- 3. Nội dung chính (.main) --- */
+.main {
+    position: relative; 
+    width: 100%;
+    min-height: 100vh; 
+    background: radial-gradient(circle at 50% 15%, #fff5f9 0%, #ffc0cb 100%);
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0; /* Giảm padding */
+    box-sizing: border-box;
+}
+
+/* --- 4. 4 bé rồng góc (.corner-dragon) --- */
+.corner-dragon {
+    position: fixed;
+    width: 50px; /* Tối ưu Mobile */
+    height: auto;
+    z-index: 30;
+    filter: drop-shadow(0 10px 25px rgba(255, 20, 147, 0.5));
+    animation: shake 8s infinite ease-in-out;
+    opacity: 0.6; /* Giảm opacity */
+}
+#d1 { top: 10px; left: 5px; } 
+#d2 { top: 15px; right: 5px; transform: scaleX(-1); animation-delay: 2s; }
+#d3 { bottom: 15px; left: 10px; animation-delay: 4s; }
+#d4 { bottom: 20px; right: 10px; transform: scaleX(-1); animation-delay: 6s; }
+@keyframes shake {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(5deg); }
+    50% { transform: translateY(5px) rotate(-5deg); }
+    75% { transform: translateY(10px) rotate(3deg); }
+}
+
+/* --- 5. 4 ảnh thật của bé (.baby) --- */
+.baby {
+    position: fixed; 
+    width: 100px; /* Tối ưu Mobile */
+    height: auto;
+    border: none; 
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(255, 20, 147, 0.8), 0 0 90px rgba(255, 105, 180, 0.6);
+    z-index: 20;
+    object-fit: contain; 
+    aspect-ratio: auto;
+    animation: float 25s infinite ease-in-out;
+}
+#b1 { top: 1%; left: 1%; animation-delay: 0s; } /* Sát góc hơn */
+#b2 { top: 1%; right: 1%; animation-delay: 6s; } 
+#b3 { bottom: 1%; left: 1%; animation-delay: 12s; } 
+#b4 { bottom: 1%; right: 1%; animation-delay: 18s; } 
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-30px) rotate(5deg); }
+    66% { transform: translateY(15px) rotate(-3deg); }
+}
+
+/* --- 6. Phần chữ chính (.container) --- */
+.container {
+    position: relative; 
+    text-align: center;
+    z-index: 100;
+    width: 95%;
+    max-width: 800px;
+    padding: 10px;
+    margin: auto; 
+}
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 12vw; /* Tối ưu Mobile */
+    margin: 0;
+    color: #ff1493;
+    text-shadow: 8px 8px 0 #fff, -8px -8px 0 #fff, 0 0 80px #ff69b4, 0 0 150px #ff1493;
+    animation: glow 3s infinite alternate;
+}
+h2 {
+    font-size: 6vw; /* Tối ưu Mobile */
+    color: #ff69b4;
+    margin: 5px 0 15px;
+    text-shadow: 4px 4px 0 #fff, 0 0 30px #ffb6c1;
+    font-weight: 900;
+}
+.info {
+    background: rgba(255, 255, 255, 0.9); 
+    padding: 20px; /* Tối ưu Mobile */
+    border-radius: 20px;
+    backdrop-filter: blur(25px);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 30px #ffc0cb;
+    font-size: 1rem; /* Tối ưu Mobile */
+    line-height: 1.6; /* Tối ưu Mobile */
+    color: #333;
+    border: 4px solid #ffb6c1;
+}
+.info p { margin: 10px 0; }
+.info strong { color: #d6006e; font-weight: 900; }
+
+.btn-music {
+    margin-top: 30px;
+    padding: 12px 30px;
+    font-size: 1.1rem; /* Tối ưu Mobile */
+    background: #ff1493;
+    color: white;
+    border: none;
+    border-radius: 70px;
+    cursor: pointer;
+    box-shadow: 0 18px 50px rgba(255, 20, 147, 0.8);
+    transition: 0.4s;
+    font-weight: 700;
+}
+.btn-music:hover {
+    background: #d6006e;
+    transform: scale(1.1);
+    box-shadow: 0 25px 60px rgba(255, 20, 147, 1);
+}
+
+@keyframes glow {
+    from { text-shadow: 8px 8px 0 #fff, 0 0 80px #ff69b4; }
+    to { text-shadow: 8px 8px 0 #fff, 0 0 150px #ff1493, 0 0 200px #ff69b4; }
+}
+
+/* --- 7. Hiệu ứng rơi và pháo hoa --- */
+.falling {
+    position: absolute;
+    pointer-events: none;
+    font-size: 30px; /* Tối ưu Mobile */
+    z-index: 10;
+    animation: fall linear infinite;
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+}
+@keyframes fall {
+    0% { transform: translateY(-120px) rotate(0deg); opacity: 0.9; }
+    100% { transform: translateY(110vh) rotate(1080deg); opacity: 0; }
+}
+
+.firework-effect {
+    position: fixed;
+    font-size: 40px; /* Tối ưu Mobile */
+    pointer-events: none;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+/* Tối ưu các thông tin quan trọng - DESKTOP */
+.info .highlight-parent {
+    color: #ff1493;
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+.info .section-title {
+    font-size: 1.5rem;
+    color: #a0005a;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+.info .highlight-date,
+.info .highlight-time,
+.info .highlight-location {
+    display: block;
+    font-size: 2.2rem; /* Rất lớn cho Desktop */
+    color: #d6006e;
+    font-weight: 900;
+    padding: 5px 0;
+    text-shadow: 1px 1px 0 #fff;
+}
+.info .highlight-location {
+    font-size: 1.8rem;
+    color: #4A90E2; /* Màu xanh nổi bật cho địa điểm */
+    line-height: 1.3;
+}
+/* Tối ưu các thông tin quan trọng - MOBILE */
+.info .highlight-parent {
+    color: #ff1493;
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+.info .section-title {
+    font-size: 1.1rem;
+    color: #a0005a;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 3px;
+}
+.info .highlight-date,
+.info .highlight-time,
+.info .highlight-location {
+    display: block;
+    font-size: 1.4rem; /* Kích thước vừa phải cho Mobile */
+    color: #d6006e;
+    font-weight: 900;
+    padding: 3px 0;
+}
+.info .highlight-location {
+    font-size: 1.2rem;
+    color: #4A90E2; 
+    line-height: 1.3;
+}
